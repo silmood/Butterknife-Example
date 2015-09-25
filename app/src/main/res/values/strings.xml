@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Butterknife-Example</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="login_succeed">Now you are logged. This is only a demo :)</string>
+    <string name="password_empty">Provide your password</string>
+    <string name="email_error">Provide your email</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="signed_up">You are signed up!</string>
+    <string name="name_error">You must provide your name</string>
+</resources>
