@@ -17,4 +17,5 @@
     <string name="last_name">Last Name</string>
     <string name="signed_up">You are signed up!</string>
     <string name="name_error">You must provide your name</string>
+    <string name="already_logged">You\'re already logged</string>
 </resources>

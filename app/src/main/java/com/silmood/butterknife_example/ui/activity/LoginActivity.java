@@ -56,12 +56,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void login(){
         if(formFilled()) {
             if (!isUserDataSaved()) {
-                Toast.makeText(this, "Los datos fueron almacenados", Toast.LENGTH_SHORT).show();
+                showMessage(R.string.login_succeed);
                 saveUserData(ViewUtils.extractText(mEmail),
                         ViewUtils.extractText(mPassword));
             }
             else
-                Toast.makeText(this, "Ya había datos almacenados", Toast.LENGTH_SHORT).show();
+                showMessage(R.string.already_logged);
         }
 
         else if (isMailEmpty())
