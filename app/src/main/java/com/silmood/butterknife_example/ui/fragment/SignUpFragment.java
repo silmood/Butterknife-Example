@@ -1,4 +1,4 @@
-package com.silmood.butterknife_example;
+package com.silmood.butterknife_example.ui.fragment;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.silmood.butterknife_example.R;
 
 import java.util.List;
 

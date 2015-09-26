@@ -1,11 +1,17 @@
-package com.silmood.butterknife_example;
+package com.silmood.butterknife_example.ui.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.silmood.butterknife_example.R;
+import com.silmood.butterknife_example.constant.PrefsConstants;
+import com.silmood.butterknife_example.util.ViewUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +37,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (isUserDataSaved()) {
+            launchMainActivity();
+            finish();
+        }
+
         setContentView(R.layout.activity_main);
 
         //The magic happen when you call this method. All the widgets with the Bind annotation could be manipulated
@@ -42,14 +54,39 @@ public class LoginActivity extends AppCompatActivity {
     //The OnClick annotation it's a clean listener implementation. No more setOnClickListener()
     @OnClick(R.id.login)
     protected void login(){
-        if(formFilled())
-            showMessage(R.string.login_succeed);
+        if(formFilled()) {
+            if (!isUserDataSaved()) {
+                Toast.makeText(this, "Los datos fueron almacenados", Toast.LENGTH_SHORT).show();
+                saveUserData(ViewUtils.extractText(mEmail),
+                        ViewUtils.extractText(mPassword));
+            }
+            else
+                Toast.makeText(this, "Ya había datos almacenados", Toast.LENGTH_SHORT).show();
+        }
 
         else if (isMailEmpty())
             mEmail.setError(getString(R.string.email_error));
 
         else if (isPasswordEmpty())
             mPassword.setError(getString(R.string.password_empty));
+    }
+
+    private void saveUserData(String username, String pass) {
+        SharedPreferences preferences =
+                getSharedPreferences(PrefsConstants.FILE_LOGIN, MODE_PRIVATE);
+
+        preferences.edit()
+                .putString(PrefsConstants.PREF_USERNAME, username)
+                .putString(PrefsConstants.PREF_PASSWORD, pass)
+                .apply();
+
+    }
+
+    private boolean isUserDataSaved() {
+        SharedPreferences preferences =
+                getSharedPreferences(PrefsConstants.FILE_LOGIN, MODE_PRIVATE);
+        return preferences.contains(PrefsConstants.PREF_USERNAME) &&
+                preferences.contains(PrefsConstants.PREF_PASSWORD);
     }
 
     @OnClick(R.id.sign_up)
